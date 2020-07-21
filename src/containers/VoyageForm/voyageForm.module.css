@@ -1,0 +1,11 @@
+.voyageForm {
+    display: flex;
+    flex-flow: column;
+    width: 30%;
+    margin: auto;
+}
+
+.voyageForm input,
+.voyageForm select {
+    margin: 5px 0px;
+}
