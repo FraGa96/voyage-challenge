@@ -8,6 +8,7 @@ const Input = (props) => {
         case 'date':
             return <input
                 id={props.id}
+                data-testid={props.id}
                 className={cssClasses.input}
                 type={props.type}
                 value={props.value}
@@ -16,6 +17,7 @@ const Input = (props) => {
             return (
                 <select
                     id={props.id}
+                    name={props.id}
                     data-testid={props.id}
                     className={cssClasses.input}
                     value={props.value}

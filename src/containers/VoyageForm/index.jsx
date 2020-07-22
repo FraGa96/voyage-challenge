@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import useForm from 'contexts/FormContext/FormContext'
 import Input from 'components/Input'
-import axiosInstance from 'axiosInstance'
+import axiosInstance, {FORM_DATA_ENDPOINT} from 'services/axiosInstance'
+import AppendField from './AppendField'
 import cssClasses from './voyageForm.module.css'
 
 const VoyageForm = () => {
@@ -11,9 +12,8 @@ const VoyageForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formData)
         try{
-            await axiosInstance.post('/formData.json', {
+            await axiosInstance.post(FORM_DATA_ENDPOINT, {
                 name: formData.name.value.trim(),
                 birthday: formData.birthday.value,
                 favoriteColor: formData.color.value
@@ -22,7 +22,6 @@ const VoyageForm = () => {
         }catch(err) {
             setMessage("Something failed!")
         }
-        
     }
 
     const changeColor = () => {
@@ -54,11 +53,12 @@ const VoyageForm = () => {
                 {
                     formData.color.value === 'Other' ?
                         (
-                            <div>
-                                <Input type='text' value={newColor} onInputChange={(e) => setNewColor(e.target.value)} />
-                                <button type='button' onClick={changeColor}>Add</button>
-                                <div>{formData.message}</div>
-                            </div>
+                            <AppendField 
+                                value={newColor} 
+                                onChange={(e) => setNewColor(e.target.value)}  
+                                id='newColor'
+                                append={changeColor}
+                                message={formData.message} />
                         )
                         : null
                 }
